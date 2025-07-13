@@ -1,4 +1,3 @@
-
 document.getElementById('abaFilmes').onclick = () => trocarAba('filmes');
 document.getElementById('abaUsuarios').onclick = () => trocarAba('usuarios');
 
