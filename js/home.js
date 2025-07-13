@@ -13,9 +13,7 @@ document.getElementById('logoutBtn').addEventListener('click', () => {
 });
 
 const listaFilmes = document.getElementById('lista-filmes');
-const detalhesSecao = document.getElementById('detalhes-filme');
-const fecharDetalhes = document.getElementById('fecharDetalhes');
-let filmeAberto = null;
+let detalheAberto = null; // para guardar o elemento detalhe atualmente aberto
 
 async function carregarFilmes() {
   try {
@@ -33,7 +31,7 @@ async function carregarFilmes() {
           const filtrados = filmes.filter(f => f.categoria?.toLowerCase() === categoria.toLowerCase());
           mostrarFilmes(filtrados);
         }
-        esconderDetalhes();
+        removerDetalhe();
       });
     });
 
@@ -44,8 +42,7 @@ async function carregarFilmes() {
 
 function mostrarFilmes(filmes) {
   listaFilmes.innerHTML = '';
-  detalhesSecao.style.display = 'none';
-  filmeAberto = null;
+  detalheAberto = null;
   filmes.forEach(filme => listaFilmes.appendChild(criarCardFilme(filme)));
 }
 
@@ -56,44 +53,53 @@ function criarCardFilme(filme) {
     <img src="${filme.imagem}" alt="${filme.titulo}">
     <h4>${filme.titulo}</h4>
   `;
-  div.addEventListener('click', () => mostrarDetalhes(filme, div));
+  div.addEventListener('click', () => toggleDetalhes(filme, div));
   return div;
 }
 
-function mostrarDetalhes(filme, card) {
-  if (filmeAberto === card) {
-    esconderDetalhes();
+function toggleDetalhes(filme, card) {
+  // Se já estiver aberto o detalhe para esse card, fecha
+  if (detalheAberto && detalheAberto.previousElementSibling === card) {
+    removerDetalhe();
     return;
   }
 
-  filmeAberto = card;
+  // Remove o detalhe aberto, se existir
+  removerDetalhe();
 
-  document.getElementById('tituloFilme').textContent = filme.titulo;
-  document.getElementById('imagemFilme').src = filme.imagem;
-  document.getElementById('categoriaFilme').textContent = `Gênero: ${filme.categoria || 'N/A'}`;
-  document.getElementById('descricaoFilme').textContent = filme.sinopse || 'Sem descrição.';
+  // Cria o elemento de detalhes
+  const detalheDiv = document.createElement('div');
+  detalheDiv.className = 'detalhes-filme';
+  detalheDiv.innerHTML = `
+    <div class="detalhes-container">
+      <div class="poster"><img src="${filme.imagem}" alt="${filme.titulo}"></div>
+      <div class="info">
+        <h3>${filme.titulo}</h3>
+        <p><strong>Gênero:</strong> ${filme.categoria || 'N/A'}</p>
+        <p>${filme.sinopse || 'Sem descrição.'}</p>
+        ${filme.trailer ? `<button class="btn-trailer">Assistir Trailer</button>` : ''}
+      </div>
+    </div>
+  `;
 
-  const btnTrailer = document.getElementById('btnAssistirTrailer');
+  // Evento para o botão de trailer
   if (filme.trailer) {
-    btnTrailer.style.display = 'inline-block';
-    btnTrailer.onclick = () => {
+    detalheDiv.querySelector('.btn-trailer').addEventListener('click', () => {
       window.open(filme.trailer, '_blank', 'width=800,height=600');
-    };
-  } else {
-    btnTrailer.style.display = 'none';
-    btnTrailer.onclick = null;
+    });
   }
 
-  detalhesSecao.style.display = 'block';
+  // Insere o detalhe logo após o card clicado
+  card.insertAdjacentElement('afterend', detalheDiv);
+
+  detalheAberto = detalheDiv;
 }
 
-function esconderDetalhes() {
-  detalhesSecao.style.display = 'none';
-  filmeAberto = null;
+function removerDetalhe() {
+  if (detalheAberto) {
+    detalheAberto.remove();
+    detalheAberto = null;
+  }
 }
-
-fecharDetalhes.addEventListener('click', () => {
-  esconderDetalhes();
-});
 
 carregarFilmes();
