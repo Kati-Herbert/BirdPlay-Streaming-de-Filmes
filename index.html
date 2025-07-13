@@ -9,7 +9,6 @@
 <body>
   <header class="topbar">
     <div class="perfil">
-      <img src="img/avatar.png" alt="Avatar" class="avatar" />
       <span id="nomeUsuario">Usuário</span>
     </div>
     <button id="logoutBtn" class="btn-sair">Sair</button>
@@ -33,24 +32,25 @@
     <h2>Todos os Filmes</h2>
     <div id="lista-filmes" class="filmes-grid"></div>
 
-    <!-- Seção detalhes fica aqui, será movida dinamicamente -->
-    <section id="detalhes-filme" class="detalhes-filme" style="display: none;">
-      <button id="fecharDetalhes" class="btn-voltar">Fechar</button>
-      <div class="detalhes-container">
-        <div class="poster">
-          <img id="imagemFilme" src="" alt="Poster do filme">
-        </div>
-        <div class="info">
-          <h3 id="tituloFilme">Título</h3>
-          <p id="categoriaFilme">Gênero: </p>
-          <p id="descricaoFilme">Descrição...</p>
-          <div class="trailer">
-            <h4>Trailer</h4>
-            <iframe id="trailerFilme" width="560" height="315" frameborder="0" allowfullscreen></iframe>
+    <div class="detalhes-wrapper">
+      <section id="detalhes-filme" class="detalhes-filme" style="display: none;">
+        <button id="fecharDetalhes" class="btn-voltar">Fechar</button>
+        <div class="detalhes-container">
+          <div class="poster">
+            <img id="imagemFilme" src="" alt="Poster do filme">
+          </div>
+          <div class="info">
+            <h3 id="tituloFilme">Título</h3>
+            <p id="categoriaFilme">Gênero: </p>
+            <p id="descricaoFilme">Descrição...</p>
+            <div class="trailer">
+              <h4>Trailer</h4>
+              <button id="btnAssistirTrailer" class="btn-trailer" style="display: none;">Assistir Trailer</button>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
   </main>
 
   <script src="https://cdn.jsdelivr.net/npm/pouchdb@7.3.0/dist/pouchdb.min.js"></script>

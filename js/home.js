@@ -15,8 +15,7 @@ document.getElementById('logoutBtn').addEventListener('click', () => {
 const listaFilmes = document.getElementById('lista-filmes');
 const detalhesSecao = document.getElementById('detalhes-filme');
 const fecharDetalhes = document.getElementById('fecharDetalhes');
-
-let filmeAberto = null; // Para rastrear qual detalhe está aberto
+let filmeAberto = null;
 
 async function carregarFilmes() {
   try {
@@ -45,6 +44,8 @@ async function carregarFilmes() {
 
 function mostrarFilmes(filmes) {
   listaFilmes.innerHTML = '';
+  detalhesSecao.style.display = 'none';
+  filmeAberto = null;
   filmes.forEach(filme => listaFilmes.appendChild(criarCardFilme(filme)));
 }
 
@@ -60,12 +61,11 @@ function criarCardFilme(filme) {
 }
 
 function mostrarDetalhes(filme, card) {
-  // Se o detalhe do mesmo filme estiver aberto, fecha
   if (filmeAberto === card) {
     esconderDetalhes();
     return;
   }
-  
+
   filmeAberto = card;
 
   document.getElementById('tituloFilme').textContent = filme.titulo;
@@ -73,23 +73,16 @@ function mostrarDetalhes(filme, card) {
   document.getElementById('categoriaFilme').textContent = `Gênero: ${filme.categoria || 'N/A'}`;
   document.getElementById('descricaoFilme').textContent = filme.sinopse || 'Sem descrição.';
 
-  const trailer = document.getElementById('trailerFilme');
+  const btnTrailer = document.getElementById('btnAssistirTrailer');
   if (filme.trailer) {
-    if (filme.trailer.includes('youtube')) {
-      trailer.src = filme.trailer.replace('watch?v=', 'embed/');
-    } else if (filme.trailer.includes('vimeo')) {
-      trailer.src = filme.trailer.replace('vimeo.com/', 'player.vimeo.com/video/');
-    } else {
-      trailer.src = filme.trailer;
-    }
-    trailer.style.display = 'block';
+    btnTrailer.style.display = 'inline-block';
+    btnTrailer.onclick = () => {
+      window.open(filme.trailer, '_blank', 'width=800,height=600');
+    };
   } else {
-    trailer.src = '';
-    trailer.style.display = 'none';
+    btnTrailer.style.display = 'none';
+    btnTrailer.onclick = null;
   }
-
-  // Move a seção detalhes-filme para logo após o card clicado
-  card.after(detalhesSecao);
 
   detalhesSecao.style.display = 'block';
 }
