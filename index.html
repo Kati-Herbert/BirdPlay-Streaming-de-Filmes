@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BirdPlay - Início</title>
+  <link rel="stylesheet" href="css/home.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="perfil">
+      <img src="img/avatar.png" alt="Avatar" class="avatar" />
+      <span id="nomeUsuario">Usuário</span>
+    </div>
+    <button id="logoutBtn" class="btn-sair">Sair</button>
+  </header>
+
+  <nav class="categorias-bar">
+    <button class="categoria-btn" data-categoria="todos">Todos</button>
+    <button class="categoria-btn" data-categoria="Ação">Ação</button>
+    <button class="categoria-btn" data-categoria="Animação">Animação</button>
+    <button class="categoria-btn" data-categoria="Aventura">Aventura</button>
+    <button class="categoria-btn" data-categoria="Comédia">Comédia</button>
+    <button class="categoria-btn" data-categoria="Documentário">Documentário</button>
+    <button class="categoria-btn" data-categoria="Drama">Drama</button>
+    <button class="categoria-btn" data-categoria="Ficção Científica">Ficção Científica</button>
+    <button class="categoria-btn" data-categoria="Romance">Romance</button>
+    <button class="categoria-btn" data-categoria="Suspense">Suspense</button>
+    <button class="categoria-btn" data-categoria="Terror">Terror</button>
+  </nav>
+
+  <main class="main-content">
+    <h2>Todos os Filmes</h2>
+    <div id="lista-filmes" class="filmes-grid"></div>
+
+    <section id="detalhes-filme" class="detalhes-filme" style="display: none;">
+      <button id="fecharDetalhes" class="btn-voltar">Fechar</button>
+      <div class="detalhes-container">
+        <div class="poster">
+          <img id="imagemFilme" src="" alt="Poster do filme">
+        </div>
+        <div class="info">
+          <h3 id="tituloFilme">Título</h3>
+          <p id="categoriaFilme">Gênero: </p>
+          <p id="descricaoFilme">Descrição...</p>
+          <div class="trailer">
+            <h4>Trailer</h4>
+            <iframe id="trailerFilme" width="560" height="315" frameborder="0" allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/pouchdb@7.3.0/dist/pouchdb.min.js"></script>
+  <script src="js/home.js"></script>
+</body>
+</html>

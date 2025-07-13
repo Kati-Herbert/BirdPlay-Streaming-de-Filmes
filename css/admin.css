@@ -1,0 +1,156 @@
+body.admin-body {
+  background-color: #eceff1;
+  color: #37474f;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding: 1rem;
+}
+
+header {
+  text-align: center;
+  padding: 1rem 0;
+  background-color: #546e7a;
+  color: white;
+  margin-bottom: 2rem;
+}
+
+header h1 {
+  font-size: 28px;
+  color: white;
+}
+
+.admin-wrapper {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+
+.tabs {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  justify-content: center;
+}
+
+.tabs button {
+  padding: 0.5rem 1rem;
+  background: #546e7a;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.tabs button.active {
+  background: #37474f;
+}
+
+
+.admin-section {
+  background: #ffffff;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  display: none;
+}
+
+.admin-section.active {
+  display: block;
+}
+
+.admin-section h2 {
+  margin-bottom: 1rem;
+  color: #546e7a;
+}
+
+
+.admin-section form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.admin-section input,
+.admin-section textarea,
+.admin-section select {
+  padding: 12px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  background: #f9f9f9;
+  color: #37474f;
+  font-size: 14px;
+  resize: vertical;
+}
+
+.admin-section button {
+  background-color: #455a64;
+  color: #fff;
+  padding: 0.8rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  font-size: 16px;
+}
+
+.admin-section button:hover {
+  background-color: #37474f;
+}
+
+
+.admin-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.admin-section li {
+  background: #f1f1f1;
+  margin-bottom: 10px;
+  padding: 1rem;
+  border-radius: 5px;
+  color: #37474f;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.admin-section li img.filme-poster {
+  width: 100px;
+  height: auto;
+  border-radius: 5px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.admin-section li .info {
+  flex-grow: 1;
+}
+
+.admin-section li .botoes {
+  display: flex;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.admin-section li button {
+  padding: 6px 10px;
+  background-color: #78909c;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.admin-section li button:hover {
+  background-color: #607d8b;
+}
+
+input[disabled], input.disabled {
+  background-color: #ddd;
+  cursor: not-allowed;
+  color: #666;
+}
