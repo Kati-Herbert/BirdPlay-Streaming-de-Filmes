@@ -110,11 +110,12 @@ body {
 }
 
 .detalhes-filme {
-  margin-top: 2rem;
+  margin-top: 1rem;
   background-color: #ffffff;
   padding: 1.5rem;
   border-radius: 10px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  grid-column: 1 / -1; /* Faz a seção ocupar toda a largura do grid */
 }
 
 .detalhes-container {
@@ -168,5 +169,19 @@ body {
   .categoria-btn {
     padding: 0.4rem 0.75rem;
     font-size: 0.85rem;
+  }
+
+  .detalhes-container {
+    flex-direction: column;
+  }
+
+  .poster img {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .trailer iframe {
+    max-width: 100%;
+    height: 200px;
   }
 }

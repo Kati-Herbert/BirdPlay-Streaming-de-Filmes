@@ -16,6 +16,8 @@ const listaFilmes = document.getElementById('lista-filmes');
 const detalhesSecao = document.getElementById('detalhes-filme');
 const fecharDetalhes = document.getElementById('fecharDetalhes');
 
+let filmeAberto = null; // Para rastrear qual detalhe está aberto
+
 async function carregarFilmes() {
   try {
     const result = await dbFilmes.allDocs({ include_docs: true });
@@ -32,7 +34,7 @@ async function carregarFilmes() {
           const filtrados = filmes.filter(f => f.categoria?.toLowerCase() === categoria.toLowerCase());
           mostrarFilmes(filtrados);
         }
-        detalhesSecao.style.display = 'none';
+        esconderDetalhes();
       });
     });
 
@@ -53,16 +55,23 @@ function criarCardFilme(filme) {
     <img src="${filme.imagem}" alt="${filme.titulo}">
     <h4>${filme.titulo}</h4>
   `;
-  div.addEventListener('click', () => mostrarDetalhes(filme));
+  div.addEventListener('click', () => mostrarDetalhes(filme, div));
   return div;
 }
 
-function mostrarDetalhes(filme) {
+function mostrarDetalhes(filme, card) {
+  // Se o detalhe do mesmo filme estiver aberto, fecha
+  if (filmeAberto === card) {
+    esconderDetalhes();
+    return;
+  }
+  
+  filmeAberto = card;
+
   document.getElementById('tituloFilme').textContent = filme.titulo;
   document.getElementById('imagemFilme').src = filme.imagem;
-  document.getElementById('anoFilme').textContent = `Ano: ${filme.ano || 'N/A'}`;
   document.getElementById('categoriaFilme').textContent = `Gênero: ${filme.categoria || 'N/A'}`;
-  document.getElementById('descricaoFilme').textContent = filme.descricao || 'Sem descrição.';
+  document.getElementById('descricaoFilme').textContent = filme.sinopse || 'Sem descrição.';
 
   const trailer = document.getElementById('trailerFilme');
   if (filme.trailer) {
@@ -75,14 +84,23 @@ function mostrarDetalhes(filme) {
     }
     trailer.style.display = 'block';
   } else {
+    trailer.src = '';
     trailer.style.display = 'none';
   }
+
+  // Move a seção detalhes-filme para logo após o card clicado
+  card.after(detalhesSecao);
 
   detalhesSecao.style.display = 'block';
 }
 
-fecharDetalhes.addEventListener('click', () => {
+function esconderDetalhes() {
   detalhesSecao.style.display = 'none';
+  filmeAberto = null;
+}
+
+fecharDetalhes.addEventListener('click', () => {
+  esconderDetalhes();
 });
 
 carregarFilmes();
