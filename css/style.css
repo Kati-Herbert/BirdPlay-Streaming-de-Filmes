@@ -124,26 +124,18 @@ form button:hover {
   background-color: #37474f;
 }
 
-.forgot,
+
 .cadastro {
   text-align: center;
   display: block;
   margin-top: 15px;
   text-decoration: none;
   font-size: 14px;
-}
-
-.forgot {
-  color: #90a4ae;
-}
-
-.cadastro {
   color: #546e7a;
   font-weight: 500;
 }
 
-.cadastro:hover,
-.forgot:hover {
+.cadastro:hover {
   text-decoration: underline;
 }
 
