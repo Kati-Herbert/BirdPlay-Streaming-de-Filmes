@@ -1,3 +1,6 @@
+const dbUsuarios = new PouchDB('usuarios');
+const dbFilmes = new PouchDB('filmes');
+
 document.getElementById('formUsuario').addEventListener('submit', async (e) => {
     e.preventDefault();
     const nome = document.getElementById('nome').value;

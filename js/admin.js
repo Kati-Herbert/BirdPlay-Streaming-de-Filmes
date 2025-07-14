@@ -1,3 +1,6 @@
+const dbUsuarios = new PouchDB('usuarios');
+const dbFilmes = new PouchDB('filmes');
+
 document.getElementById('abaFilmes').onclick = () => trocarAba('filmes');
 document.getElementById('abaUsuarios').onclick = () => trocarAba('usuarios');
 

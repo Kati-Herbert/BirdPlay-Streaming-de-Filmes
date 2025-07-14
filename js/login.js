@@ -1,3 +1,6 @@
+const dbUsuarios = new PouchDB('usuarios');
+const dbFilmes = new PouchDB('filmes');
+
 async function criarAdminPadrao() {
   try {
     const resultado = await dbUsuarios.allDocs({ include_docs: true });
